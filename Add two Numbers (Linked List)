@@ -1,0 +1,82 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; this.next=null;}
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution 
+{
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) 
+    {
+        int carr=0,c1=0,c2=0,a;
+        ListNode curr1=l1,curr2=l2;
+        while((curr1!=null)||(curr2!=null))
+        {
+            if((curr1==null)&&(curr2==null))
+            {
+                break;
+            }
+            else if((curr1!=null)&&(curr2!=null))
+            {
+                a=carr;
+                carr=(curr1.val+curr2.val+a)/10;
+                curr1.val=(curr1.val+curr2.val+a)%10;
+                curr2.val=curr1.val;
+                c1++;
+                c2++;
+                if((carr>0)&&((curr1.next==null)&&(curr2.next==null)))
+                {
+                    curr2.next = new ListNode(carr,null);
+                    break;
+                }
+                curr1=curr1.next;
+                curr2=curr2.next;
+                continue;
+            }
+            else if((curr1!=null)&&(curr2==null))
+            {
+                a=carr;
+                carr=(curr1.val+a)/10;
+                curr1.val=(curr1.val+a)%10;
+                c1++;
+                if((carr>0)&&(curr1.next==null))
+                {
+                    curr1.next = new ListNode(carr,null);
+                    break;
+                }
+                curr1=curr1.next;
+                continue;
+            }
+            else
+            {
+                a=carr;
+                carr=(curr2.val+a)/10;
+                curr2.val=(curr2.val+a)%10;
+                c2++;
+                if((carr>0)&&(curr2.next==null))
+                {
+                    curr2.next = new ListNode(carr,null);
+                    break;
+                }
+                curr2=curr2.next;
+                continue;
+            }
+        }
+        if(c1==c2)
+        {
+            return l2;
+        }
+        else if(c1>c2)
+        {
+            return l1;
+        }
+        else
+        {
+            return l2;
+        }
+    }
+}

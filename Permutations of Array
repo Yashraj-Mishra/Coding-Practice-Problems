@@ -1,0 +1,30 @@
+class Solution 
+{
+    static List<List<Integer>> arr = new ArrayList<List<Integer>>();
+    public List<List<Integer>> permute(int[] nums) 
+    {
+        arr.clear();
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        printPermutations(nums, list);
+        return arr; 
+    }
+    static void printPermutations(int a[], ArrayList<Integer> list)
+	{
+	    if(a.length==list.size())
+	    {
+	        arr.add(new ArrayList<Integer>(list));
+	    }
+	    else
+	    {
+	        for(int i=0;i<a.length;i++)
+	        {
+	            if(list.contains(a[i])!=true)
+	            {
+	                list.add(a[i]);
+	                printPermutations(a, list);
+	                list.remove(list.size()-1);
+	            }
+	        }
+	    }
+	}
+}

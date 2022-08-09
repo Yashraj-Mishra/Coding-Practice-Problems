@@ -1,0 +1,59 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution 
+{
+    public List<List<Integer>> levelOrder(TreeNode root) 
+    {
+        int i,h;
+        h = height(root);
+        List<List<Integer>> x = new ArrayList<List<Integer>>();
+        for(i=1;i<=h;i++)
+        {
+            x.add(new ArrayList<Integer>());
+        }
+        levelOrderclone(root, h, 1, x);
+        return x;
+    }
+    static void levelOrderclone(TreeNode root, int h1, int h2, ArrayList<List<Integer>> list)
+    {
+        if(root==null)
+        {
+            return 0;
+        }
+        else if(h2==h1)
+        {
+            list.get(h2-1).add(root.val);
+            return levelOrderclone(root.left, h1, h2+1, list) & levelOrderclone(root.right, h1, h2+1, list);
+        }
+        else
+        {
+            return levelOrderclone(root.left, h1, h2+1, list) & levelOrderclone(root.right, h1, h2+1, list);
+        }
+        
+    }
+    static int height(TreeNode root)
+    {
+        if(root==null)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1+Math.max(height(root.left), height(root.right));
+        }
+    }
+    
+}

@@ -1,0 +1,31 @@
+import java.util.*;
+public class Main {
+    static int findMaxConsecutiveOnes(int nums[]) {
+        int cnt = 0;
+        int maxi = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 1) {
+                cnt++;
+            } else {
+                cnt = 0;
+            }
+
+            maxi = Math.max(maxi, cnt);
+        }
+        return maxi;
+    }
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int a[] = new int[n]
+        for(int i=0;i<n;i++)
+        {
+            a[i]=sc.nextInt();
+        }
+        int ans = findMaxConsecutiveOnes(a);
+        System.out.println("The maximum  consecutive 1's are " + ans);
+    }
+}
+
+
+        

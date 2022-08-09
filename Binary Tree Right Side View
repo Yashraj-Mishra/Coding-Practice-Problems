@@ -1,0 +1,61 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    static int c=1;
+    public List<Integer> rightSideView(TreeNode root) 
+    {
+        c=1;
+        List<Integer> arr = new ArrayList<Integer>();
+        if(root==null)
+        {
+            return arr;
+        }
+        rightSideViewClone(root, arr, 1, height(root));
+        return arr;
+    }
+    static int rightSideViewClone(TreeNode root, List<Integer> list, int h1, int h2)
+    {
+        if(root==null)
+        {
+            return 0;
+        }
+        if((h1==c)&&(h1<=h2))
+        {
+            list.add(root.val);
+            c++;
+            rightSideViewClone(root.right, list, h1+1, h2);
+            rightSideViewClone(root.left, list, h1+1, h2);
+            return 0;
+        }
+        else
+        {
+            rightSideViewClone(root.right, list, h1+1, h2);
+            rightSideViewClone(root.left, list, h1+1, h2);
+            return 0;
+        }
+    }
+    static int height(TreeNode root)
+    {
+        if(root==null)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1+Math.max(height(root.left), height(root.right));
+        }
+    }
+}
